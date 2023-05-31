@@ -49,11 +49,22 @@ def get_metadata_for_specific_variant(variant_name='Omicron'):
     return df
 
 
-def sort_df_by_date(df):
-    df['Collection date'] = pd.to_datetime(df['Collection date'], format="mixed")
-    df.sort_values(by='Collection date', inplace=True)
+def try_parsing_date(text):
+    for fmt in ('%Y-%m-%d', '%Y-%m', '%Y'):
+        try:
+            return pd.to_datetime(text, format=fmt)
+        except ValueError:
+            pass
+    print(text, "\n")
+    raise ValueError('no valid date format found')
 
-    # df.to_csv("./example_ordered_beta.tsv", sep=",")  # *** TEMP
+
+def sort_df_by_date(df):
+    for i in range(len(df)):
+        df.at[i, 'Collection date'] = try_parsing_date(df.at[i, 'Collection date'])
+    # df['Collection date'] = pd.to_datetime(df['Collection date'], format="mixed")
+
+    df.sort_values(by='Collection date', inplace=True)
     return df
 
 
@@ -75,7 +86,7 @@ def get_uniform_2000_sample_for_a_variant(variant_name='Omicron'):
 
 pd.set_option('display.max_columns', None)
 
-simplified_df = simplify_metadata()
+"""simplified_df = simplify_metadata()
 print(simplified_df)
 
 filtered_complete_df = filter_all_metadata()
@@ -87,7 +98,7 @@ print(filtered_omicron_df)
 get_metadata_for_specific_variant(variant_name='Alpha')
 get_metadata_for_specific_variant(variant_name='Beta')
 get_metadata_for_specific_variant(variant_name='Delta')
-get_metadata_for_specific_variant(variant_name='Gamma')
+get_metadata_for_specific_variant(variant_name='Gamma')"""
 
 sampled_beta_df = get_uniform_2000_sample_for_a_variant(variant_name='Beta')
 print("\n", sampled_beta_df, "\n")
