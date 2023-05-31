@@ -1,10 +1,10 @@
 import pandas as pd
 
-metadata_path = "./metadata_tsv_2023_05_22/metadata.tsv"
-simplified_metadata_path = "./preprocessed_metadata/simplified_metadata.tsv"
-filtered_complete_metadata_path = "./preprocessed_metadata/filtered_all_metadata.tsv"
-filtered_specific_variant_path = "./preprocessed_metadata/"
-selected_2000_for_variant_path = "./preprocessed_metadata/2000_samples_per_variant/"
+metadata_path = "../metadata_tsv_2023_05_22/metadata.tsv"
+simplified_metadata_path = "../preprocessed_metadata/simplified_metadata.tsv"
+filtered_complete_metadata_path = "../preprocessed_metadata/filtered_all_metadata.tsv"
+filtered_specific_variant_path = "../preprocessed_metadata/"
+selected_2000_for_variant_path = "../preprocessed_metadata/2000_samples_per_variant/"
 
 selected_cols = ['Virus name', 'Accession ID', 'Collection date', 'Host', 'Variant', 'Is complete?',
                  'Is high coverage?']
