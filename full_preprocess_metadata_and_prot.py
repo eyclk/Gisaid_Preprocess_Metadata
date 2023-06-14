@@ -122,6 +122,9 @@ def sort_df_by_date(df):
     for i in range(len(df)):
         df.at[i, 'date'] = try_parsing_date(df.at[i, 'date'])
     df.sort_values(by='date', inplace=True)
+
+    for j in range(len(df)):
+        df.at[j, 'date'] = str(df.at[j, 'date']).split(' ')[0]
     return df
 
 
@@ -156,11 +159,11 @@ get_metadata_for_specific_variant(variant_name='Delta')
 get_metadata_for_specific_variant(variant_name='Gamma')"""
 
 
-get_spikeprot_for_filtered_metadata(variant_name='Beta')
+"""get_spikeprot_for_filtered_metadata(variant_name='Beta')
 get_spikeprot_for_filtered_metadata(variant_name='Alpha')
 get_spikeprot_for_filtered_metadata(variant_name='Delta')
 get_spikeprot_for_filtered_metadata(variant_name='Gamma')
-get_spikeprot_for_filtered_metadata(variant_name='Omicron')
+get_spikeprot_for_filtered_metadata(variant_name='Omicron')"""
 
 
 sample_from_complete_filtered_prot_csv(sample_size=2000, variant_name='Beta')
